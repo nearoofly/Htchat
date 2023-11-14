@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Web</title>
+    <style>
+        /* Votre style CSS ici */
+    </style>
+</head>
+<body>
+    <h1>Robot Web</h1>
+
+    <div id="chat-container"></div>
+
+    <div id="input-container">
+        <input type="text" id="message-input" placeholder="Type your message..." onkeydown="handleKeyPress(event)">
+        <button id="send-button" onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            var userInput = document.getElementById("message-input").value;
+            displayMessage("User: " + userInput);
+
+            // Appel à l'API GPT-3 pour obtenir une réponse
+            var robotResponse = await getGPT3Response(userInput);
+
+            displayMessage("Robot: " + robotResponse.choices[0].text);
+            document.getElementById("message-input").value = "";
+        }
+
+        async function getGPT3Response(userInput) {
+            // Remplacez 'YOUR_API_KEY' par votre clé API GPT-3
+            const apiKey = 'YOUR_API_KEY';
+            const endpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`,
+                },
+                body: JSON.stringify({
+                    prompt: userInput,
+                    max_tokens: 50,
+                }),
+            });
+
+            return await response.json();
+        }
+
+        function displayMessage(message) {
+            var chatContainer = document.getElementById("chat-container");
+            var messageElement = document.createElement("p");
+            messageElement.textContent = message;
+            chatContainer.appendChild(messageElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>

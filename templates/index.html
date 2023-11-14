@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Interface</title>
+</head>
+<body>
+    <div>
+        <h1>Interface Robot</h1>
+        <!-- Liste des messages -->
+        <ul id="message-list"></ul>
+
+        <!-- Champ de saisie -->
+        <input type="text" id="message-input" placeholder="Votre message...">
+        
+        <!-- Bouton d'envoi -->
+        <button onclick="sendMessage()">Envoyer</button>
+
+        <!-- Bouton de parole -->
+        <button onclick="startListening()">Parler</button>
+    </div>
+
+    <script>
+        // Fonction pour envoyer un message à l'interface Python
+        function sendMessage() {
+            var messageInput = document.getElementById("message-input");
+            var message = messageInput.value;
+            if (message.trim() !== "") {
+                // Appeler une fonction JavaScript qui communique avec Python (à implémenter)
+                sendToPython(message);
+                messageInput.value = "";
+            }
+        }
+
+        // Fonction pour démarrer l'écoute
+        function startListening() {
+            // Appeler une fonction JavaScript qui communique avec Python (à implémenter)
+            startListeningPython();
+        }
+
+        // Fonction pour ajouter un message à la liste
+        function addMessageToList(message) {
+            var messageList = document.getElementById("message-list");
+            var listItem = document.createElement("li");
+            listItem.appendChild(document.createTextNode(message));
+            messageList.appendChild(listItem);
+        }
+
+        // Fonction pour ajouter un message à la liste depuis Python
+        function addMessageFromPython(message) {
+            addMessageToList("Robot: " + message);
+        }
+    </script>
+</body>
+</html>

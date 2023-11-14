@@ -1,0 +1,32 @@
+Author:Wharkly47
+Version 1.2.4
+##Find more: https://github.com/Wharkly47
+
+Installer les bibliothèques nécessaires : Assurez-vous d'installer les bibliothèques SpeechRecognition et gTTS. Vous pouvez le faire en exécutant ces commandes dans votre terminal ou invite de commande :
+
+##bash
+
+Copy code
+
+$pip install SpeechRecognition
+
+$pip install gtts
+
+Créer un fichier Python : Utilisez un éditeur de texte ou un environnement de développement intégré (IDE) pour créer un fichier Python. Copiez-collez le code dans ce fichier.
+
+Exécuter le script : Exécutez le script en ouvrant une fenêtre de terminal ou d'invite de commande, naviguez jusqu'au répertoire où vous avez enregistré le fichier Python, puis exécutez la commande :
+
+##bash
+
+Copy code
+
+$python robot_parle.py
+
+Interagir avec le robot : Le script attendra que vous disiez quelque chose. Dites quelque chose dans le microphone, et le robot devrait répéter ce que vous avez dit.
+
+N'oubliez pas que pour utiliser la synthèse vocale, le script enregistre temporairement le texte dans un fichier audio, puis le lit à l'aide du lecteur audio mpg321. Assurez-vous que votre système prend en charge ce lecteur audio. Vous pouvez ajuster cette partie du script en fonction des capacités audio de votre système.
+
+Create by Wharkly 2023/13/11
+
+You need to install $ pip install Flask gtts pydub
+

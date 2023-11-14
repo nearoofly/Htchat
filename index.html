@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url('Gif/hchat.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #robot-image {
+            width: 150px; /* Ajustez la taille de l'image selon vos besoins */
+            height: auto;
+            margin-top: 20px; /* Ajustez la marge selon vos besoins */
+        }
+
+        #chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* Blanc */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #message-input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #send-button {
+            background-color: #2980b9; /* Bleu plus foncé */
+            color: #ffffff; /* Blanc */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #chat-log {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .user-message {
+            background-color: #ecf0f1; /* Bleu très clair */
+            color: #000000; /* Noir */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .robot-message {
+            background-color: #2ecc71; /* Vert */
+            color: #ffffff; /* Blanc */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <title>H'Chat</title>
+</head>
+
+
+
+<body>
+
+    <div id="chat-container">
+        <img id="robot-image" src="image/robot.jpg" alt="Robot Image">
+        <div id="chat-log"></div>
+        <input type="text" id="message-input" placeholder="Tapez votre message..." onkeyup="checkEnter(event)">
+        <button id="send-button" onclick="sendMessage()">Envoyer</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userMessage = document.getElementById("message-input").value;
+            appendMessage("user", userMessage);
+
+            // Générer la réponse du robot en fonction du message de l'utilisateur
+            var robotResponse = generateRobotResponse(userMessage);
+
+            appendMessage("robot", robotResponse);
+            document.getElementById("message-input").value = "";
+
+            // Faites parler le robot
+            speak(robotResponse);
+        }
+
+        function appendMessage(sender, message) {
+            var messageElement = document.createElement("div");
+            messageElement.textContent = message;
+            messageElement.className = sender + "-message";
+            document.getElementById("chat-log").appendChild(messageElement);
+        }
+
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        function speak(text) {
+            var speech = new SpeechSynthesisUtterance();
+            speech.lang = "fr-FR";
+            speech.text = text;
+            window.speechSynthesis.speak(speech);
+        }
+
+        function generateRobotResponse(userMessage) {
+            // Logique pour générer différentes réponses du robot en fonction du message de l'utilisateur
+            if (userMessage.toLowerCase().includes("bonjour")) {
+                return "Bonjour ! Comment puis-je vous aider ?";
+            } else if (userMessage.toLowerCase().includes("merci")) {
+                return "De rien !";
+            } else {
+                return "Je devrais vous poser quelques questions car j'ai remarqué que vous aimez dit bonjour ,je ne suis pas encore complète pour repondre à toutes vos questions,je suis encore en construction cela fait quelques heures. Au revoir!";
+            }
+        
+        }
+        
+        
+        
+        
+        
+        
+   
+        
+        
+    </script>
+
+    <footer>
+        <p>&copy; 2023 HDessa video create by Willy</p>
+    </footer>
+    
+</body>
+</html>
